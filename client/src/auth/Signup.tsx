@@ -7,13 +7,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
 
 function Signup() {
-  // interface SignupInputState {
-  //   fullname: string;
-  //   email: string;
-  //   password: string;
-  //   contact: string;
-  // }
-
+  // State to manage form inputs
   const [input, setInput] = useState<SignupInputState>({
     fullname: "",
     email: "",
@@ -21,27 +15,32 @@ function Signup() {
     contact: "",
   });
 
+  // State to manage validation errors
   const [errors, setErrors] = useState<Partial<SignupInputState>>({});
+  let loading = false;
+
+  // Function to handle input changes
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
+  // Function to handle form submission
   const loginSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     loading = true;
-    // form validation check start
+
+    // Validate form inputs
     const result = userSignupSchema.safeParse(input);
     if (!result.success) {
       const fieldErrors = result.error.formErrors.fieldErrors;
       setErrors(fieldErrors as Partial<SignupInputState>);
-      return
+      return;
     }
-    // login api implementation start here
+
+    // API call for signup (to be implemented)
     console.log(input);
   };
-
-  let loading = false;
 
   return (
     <div className="flex items-center justify-center w-screen min-h-screen">
@@ -52,6 +51,8 @@ function Signup() {
         <div className="mb-4 text-center">
           <h1 className="font-bold text-2xl">Daily Eatery</h1>
         </div>
+
+        {/* Full Name Input */}
         <div className="relative text-left">
           <Input
             type="text"
@@ -62,10 +63,12 @@ function Signup() {
             onChange={changeEventHandler}
           />
           <User className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {
-            errors && <span className="text-red-500">{errors.fullname}</span>
-          }
+          {errors.fullname && (
+            <span className="text-red-500 text-xs">{errors.fullname}</span>
+          )}
         </div>
+
+        {/* Email Input */}
         <div className="relative text-left">
           <Input
             type="email"
@@ -76,10 +79,10 @@ function Signup() {
             onChange={changeEventHandler}
           />
           <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {
-            errors && <span className="text-red-500">{errors.email}</span>
-          }
+          {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
         </div>
+
+        {/* Password Input */}
         <div className="relative text-left">
           <Input
             type="password"
@@ -90,10 +93,12 @@ function Signup() {
             onChange={changeEventHandler}
           />
           <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {
-            errors && <span className="text-red-500">{errors.password}</span>
-          }
+          {errors.password && (
+            <span className="text-red-500 text-xs">{errors.password}</span>
+          )}
         </div>
+
+        {/* Contact Input */}
         <div className="relative text-left">
           <Input
             type="number"
@@ -104,11 +109,13 @@ function Signup() {
             onChange={changeEventHandler}
           />
           <Phone className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {
-            errors ? <span className="text-red-500">{errors.contact} </span> : ""
-          }
+          {errors.contact && (
+            <span className="text-red-500 text-xs">{errors.contact}</span>
+          )}
         </div>
-        <div className="mb4">
+
+        {/* Submit Button */}
+        <div className="mb-4">
           {loading ? (
             <Button
               className="w-full bg-aubergine hover:bg-hoverAubergine"
@@ -119,16 +126,18 @@ function Signup() {
           ) : (
             <Button
               className="w-full bg-aubergine hover:bg-hoverAubergine"
-              onClick={loginSubmitHandler}
               type="submit"
             >
               Signup
             </Button>
           )}
         </div>
+
         <Separator />
+
+        {/* Login Link */}
         <p className="mt-2">
-          Already have an account
+          Already have an account?
           <Link to="/login" className="text-blue-500 ml-2">
             Login
           </Link>

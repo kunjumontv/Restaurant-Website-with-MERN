@@ -1,12 +1,14 @@
 import Login from "./auth/Login";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainLayout from "./MainLayout";
 import Signup from "./auth/Signup";
+import MainLayout from "./MainLayout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+// Define the application's routes
 const appRouter = createBrowserRouter([
   {
-    path: "/",
-    element: <MainLayout />,
+    path: "/", 
+    element: <MainLayout />, // Main layout that acts as a wrapper for other pages
+   
     // children: [
     //   {
     //     path: "/login",
@@ -15,11 +17,11 @@ const appRouter = createBrowserRouter([
     // ],
   },
   {
-    path: "/login",
+    path: "/login", 
     element: <Login />,
   },
   {
-    path: "/signup",
+    path: "/signup", 
     element: <Signup />,
   },
 ]);
@@ -27,7 +29,8 @@ const appRouter = createBrowserRouter([
 const App = () => {
   return (
     <main>
-      <RouterProvider router={appRouter}></RouterProvider>
+      {/* Provides routing functionality to the application */}
+      <RouterProvider router={appRouter} />
     </main>
   );
 };
