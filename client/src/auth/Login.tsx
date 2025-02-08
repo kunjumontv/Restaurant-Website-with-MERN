@@ -7,15 +7,16 @@ import { ChangeEvent, FormEvent, useState, useCallback } from "react";
 import { LoginInputState, userLoginSchema } from "@/schema/userSchema";
 
 function Login() {
-  
   // to manage form input values
-  const [input, setInput] = useState<LoginInputState>({ email: "", password: "" }); 
+  const [input, setInput] = useState<LoginInputState>({
+    email: "",
+    password: "",
+  });
   // to manage validation errors
   const [errors, setErrors] = useState<Partial<LoginInputState>>({});
   // to prevents multiple submissions and shows a loading indicator.
   const [loading, setLoading] = useState(false);
 
- 
   const changeEventHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -26,26 +27,30 @@ function Login() {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   }, []);
 
- 
-  //  Handles form submission. 
-  const loginSubmitHandler = useCallback((e: FormEvent) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setLoading(true); 
+  //  Handles form submission.
+  const loginSubmitHandler = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault(); // Prevent default form submission behavior
+      setLoading(true);
 
-    // Validate the input using Zod schema
-    const result = userLoginSchema.safeParse(input);
+      // Validate the input using Zod schema
+      const result = userLoginSchema.safeParse(input);
 
-    // If validation fails, update the errors state and stop submission.
-    if (!result.success) {
-      setErrors(result.error.formErrors.fieldErrors as Partial<LoginInputState>);
-      setLoading(false); // Stop loading since submission failed
-      return;
-    }
+      // If validation fails, update the errors state and stop submission.
+      if (!result.success) {
+        setErrors(
+          result.error.formErrors.fieldErrors as Partial<LoginInputState>
+        );
+        setLoading(false); // Stop loading since submission failed
+        return;
+      }
 
-    // If validation is successful, log the input (or send it to an API).
-    console.log(input);
-    setLoading(false); // Reset loading state
-  }, [input]);
+      // If validation is successful, log the input (or send it to an API).
+      console.log(input);
+      setLoading(false); // Reset loading state
+    },
+    [input]
+  );
 
   return (
     <div className="flex items-center justify-center w-screen min-h-screen">
@@ -67,9 +72,11 @@ function Login() {
             value={input.email}
             onChange={changeEventHandler}
           />
-          
+
           <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {errors.email && <span className="text-red-500 text-xs">{errors.email}</span>}
+          {errors.email && (
+            <span className="text-red-500 text-xs">{errors.email}</span>
+          )}
         </div>
 
         {/* Password Input Field */}
@@ -83,7 +90,9 @@ function Login() {
             onChange={changeEventHandler}
           />
           <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {errors.password && <span className="text-red-500 text-xs">{errors.password}</span>}
+          {errors.password && (
+            <span className="text-red-500 text-xs">{errors.password}</span>
+          )}
         </div>
 
         {/* Submit Button */}
@@ -102,6 +111,14 @@ function Login() {
               "Login"
             )}
           </Button>
+          <div className="mt-4 text-center">
+            <Link
+              to="/forgot-password"
+              className="hover:text-blue-500 hover:underline text-sm"
+            >
+              Forgot Password
+            </Link>
+          </div>
         </div>
 
         <Separator />
