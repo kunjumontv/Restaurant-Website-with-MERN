@@ -1,11 +1,19 @@
-import { Plus } from "lucide-react";
+import {
+  Loader2,
+  LocateIcon,
+  Mail,
+  MapPin,
+  MapPinnedIcon,
+  Plus,
+} from "lucide-react";
+import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { Button } from "./ui/button";
 
 type ProfileDataState = {
   fullname: string;
   email: string;
-  phone: string;
   address: string;
   city: string;
   country: string;
@@ -16,7 +24,6 @@ const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileDataState>({
     fullname: "",
     email: "",
-    phone: "",
     address: "",
     city: "",
     country: "",
@@ -24,7 +31,11 @@ const Profile = () => {
   });
   const [selectedProfilePicture, setSelectedProfilePicutre] =
     useState<string>("");
+
+  const loading = false;
+
   const imageRef = useRef<HTMLInputElement | null>(null);
+
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -32,7 +43,12 @@ const Profile = () => {
       reader.onloadend = () => {
         const result = reader.result as string;
         setSelectedProfilePicutre(result);
+        setProfileData((previousData) => ({
+          ...previousData,
+          profilePicture: result,
+        }));
       };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -41,12 +57,18 @@ const Profile = () => {
     setProfileData({ ...profileData, [name]: value });
   };
 
+  const updateProfileHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(profileData);
+    //update profile api implementation 
+  };
+
   return (
-    <form className="max-w-7xl mx-auto my-3">
+    <form onSubmit={updateProfileHandler} className="max-w-7xl mx-auto my-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Avatar className="relative md:w-28 md:h-28 w-20 h-20">
-            <AvatarImage />
+            <AvatarImage src={selectedProfilePicture} />
             <AvatarFallback>CN</AvatarFallback>
             <input
               ref={imageRef}
@@ -64,11 +86,77 @@ const Profile = () => {
           </Avatar>
           <input
             type="text"
-            name={profileData.fullname}
+            name="fullname"
+            value={profileData.fullname}
             onChange={changeHandler}
             className="font-bold text-2xl outline-none border-none focus-visible:ring-transparent"
           />
         </div>
+      </div>
+      <div className="grid md:grid-cols-4 md:gap-2 gap-3 my-10">
+        <div className="flex items-center gap-4 rounded-sm bg-gray-200 p-2">
+          <Mail className="text-gray-500" />
+          <div className="w-full">
+            <Label>Email</Label>
+            <input
+              type="text"
+              name="email"
+              value={profileData.email}
+              onChange={changeHandler}
+              className="w-full bg-transparent focus-visible:ring-0 text-gray-600 focus-visible:border-transparent outline-none border-none"
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-4 rounded-sm bg-gray-200 p-2">
+          <LocateIcon className="text-gray-500" />
+          <div className="w-full">
+            <Label>Address</Label>
+            <input
+              type="text"
+              name="address"
+              value={profileData.address}
+              onChange={changeHandler}
+              className="w-full bg-transparent focus-visible:ring-0 text-gray-600 focus-visible:border-transparent outline-none border-none"
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-4 rounded-sm bg-gray-200 p-2">
+          <MapPin className="text-gray-500" />
+          <div className="w-full">
+            <Label>City</Label>
+            <input
+              type="text"
+              name="city"
+              value={profileData.city}
+              onChange={changeHandler}
+              className="w-full bg-transparent focus-visible:ring-0 text-gray-600 focus-visible:border-transparent outline-none border-none"
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-4 rounded-sm bg-gray-200 p-2">
+          <MapPinnedIcon className="text-gray-500" />
+          <div className="w-full">
+            <Label>Country</Label>
+            <input
+              type="text"
+              name="country"
+              value={profileData.country}
+              onChange={changeHandler}
+              className="w-full bg-transparent focus-visible:ring-0 text-gray-600 focus-visible:border-transparent outline-none border-none"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="text-center">
+        {loading ? (
+          <Button disabled className="bg-aubergine hover:bg-hoverAubergine">
+            <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
+          </Button>
+        ) : (
+          <Button className="bg-aubergine hover:bg-hoverAubergine">
+            Update
+          </Button>
+        )}
       </div>
     </form>
   );

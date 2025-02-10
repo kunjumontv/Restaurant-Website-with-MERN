@@ -213,7 +213,7 @@ const MobileNavbar = () => {
               <AvatarImage />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <h1 className="font-bold">Patel Mernstack</h1>
+            <h1 className="font-bold">Eatery</h1>
           </div>
 
           <SheetClose asChild>

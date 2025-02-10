@@ -7,6 +7,7 @@ import ResetPassword from "./auth/ResetPassword";
 import VerifyEmail from "./auth/VerifyEmail";
 import HeroSection from "./components/HeroSection";
 import Profile from "./components/Profile";
+import SearchPage from "./components/SearchPage";
 
 // Define the application's routes
 const appRouter = createBrowserRouter([
@@ -21,6 +22,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
     ],
   },
