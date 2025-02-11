@@ -8,6 +8,7 @@ import VerifyEmail from "./auth/VerifyEmail";
 import HeroSection from "./components/HeroSection";
 import Profile from "./components/Profile";
 import SearchPage from "./components/SearchPage";
+import RestaurantDetail from "./components/RestaurantDetail";
 
 // Define the application's routes
 const appRouter = createBrowserRouter([
@@ -24,8 +25,12 @@ const appRouter = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/search",
+        path: "/search/:text",
         element: <SearchPage />,
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantDetail />,
       },
     ],
   },

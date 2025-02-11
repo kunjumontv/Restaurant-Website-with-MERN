@@ -1,4 +1,4 @@
-import FilterPage from "@/auth/FilterPage";
+import FilterPage from "@/components/FilterPage";
 import { Link, useParams } from "react-router-dom";
 import { Input } from "./ui/input";
 import { useState } from "react";
