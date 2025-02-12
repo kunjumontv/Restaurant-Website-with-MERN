@@ -1,4 +1,4 @@
-import AvailableMenu from "./AvailableMenu";
+import AvailableMenu from "./AvailableMenus";
 import { Badge } from "./ui/badge";
 import { Timer } from "lucide-react";
 const RestaurantDetail = () => {
