@@ -38,7 +38,7 @@ const Cart = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
+          <TableRow className="text-base font-bold">
             <TableCell>
               <Avatar>
                 <AvatarImage src="" alt="" />
@@ -82,7 +82,7 @@ const Cart = () => {
           </TableRow>
         </TableBody>
         <TableFooter>
-          <TableRow>
+          <TableRow className="text-xl font-bold">
             <TableCell colSpan={5}>Total</TableCell>
             <TableCell className="text-right">80</TableCell>
           </TableRow>
