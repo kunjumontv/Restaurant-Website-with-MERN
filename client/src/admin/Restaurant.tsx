@@ -141,7 +141,7 @@ const Restaurant = () => {
                 )}
               </div>
             </div>
-            <div className="mt-8 flex md:justify-end">
+            <div className="mt-5 flex md:justify-end">
               {loading ? (
                 <Button
                   disabled
