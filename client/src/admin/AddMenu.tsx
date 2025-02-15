@@ -1,4 +1,4 @@
-import EditMenu from "@/components/EditMenu";
+import EditMenu from "@/admin/EditMenu";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { menuFormSchema, MenuFormSchema } from "@/schema/menuSchema";
 import { Loader2, Plus } from "lucide-react";
-import { title } from "process";
 import { useState } from "react";
 
 const AddMenu = () => {
@@ -22,10 +21,11 @@ const AddMenu = () => {
   const [input, setInput] = useState<MenuFormSchema>({
     name: "",
     description: "",
-    price: 0.0,
+    price: 80,
     imageFile: undefined,
   });
   const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const [editOpen, setEditOpen] = useState<boolean>(false);
   const [selectedMenu, setSelectedMenu] = useState<any>();
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ const AddMenu = () => {
 
   const menus = [
     {
-      title: "Biriyani",
+      name: "Biriyani",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, eligendi?",
       price: 30,
@@ -54,7 +54,7 @@ const AddMenu = () => {
         "https://www.allrecipes.com/thmb/UhPUZBO9xWeCmjr6pcBr-7fl8F0=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/50347-indian-tandoori-chicken-DDMFS-4x3-3035-205e98c80b2f4275b5bd010c396d9149.jpg",
     },
     {
-      title: "Biriyani",
+      name: "Biriyani",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, eligendi?",
       price: 30,
@@ -91,12 +91,11 @@ const AddMenu = () => {
                   type="text"
                   name="name"
                   placeholder="Enter menu name"
+                  value={input.name}
                   onChange={changeEventHandler}
                 />
                 {errors.name && (
-                  <span className="text-xs text-red-500">
-                    {errors.cuisines[0]}
-                  </span>
+                  <span className="text-xs text-red-500">{errors.name}</span>
                 )}
               </div>
               <div>
@@ -105,6 +104,7 @@ const AddMenu = () => {
                   type="text"
                   name="description"
                   placeholder="Description"
+                  value={input.description}
                   onChange={changeEventHandler}
                 />
                 {errors.description && (
@@ -119,12 +119,11 @@ const AddMenu = () => {
                   type="number"
                   name="price"
                   placeholder="Enter menu price"
+                  value={input.price}
                   onChange={changeEventHandler}
                 />
                 {errors.price && (
-                  <span className="text-xs text-red-500">
-                    {errors.price[0]}
-                  </span>
+                  <span className="text-xs text-red-500">{errors.price}</span>
                 )}
               </div>
               <div>
@@ -141,7 +140,7 @@ const AddMenu = () => {
                 />
                 {errors.imageFile && (
                   <span className="text-xs text-red-500">
-                    {errors.imageFile[0]}
+                    {errors.imageFile}
                   </span>
                 )}
               </div>
@@ -157,7 +156,7 @@ const AddMenu = () => {
                 ) : (
                   <Button
                     type="submit"
-                    className="bg-aubergine bg-hoverAubergine"
+                    className="bg-aubergine hover:bg-hoverAubergine"
                   >
                     Submit
                   </Button>
@@ -178,7 +177,7 @@ const AddMenu = () => {
 
             <div className="flex-1">
               <h1 className="text-lg font-semibold text-gray-800 ">
-                {menu.title}
+                {menu.name}
               </h1>
               <p className="text-sm text-gray-600 mt-1">{menu.description}</p>
               <h2 className="text-md font-semibold mt-2">
@@ -186,7 +185,10 @@ const AddMenu = () => {
               </h2>
             </div>
             <Button
-              onClick={() => setSelectedMenu(menu)}
+              onClick={() => {
+                setSelectedMenu(menu);
+                setEditOpen(true);
+              }}
               size={"sm"}
               className="mt-2 bg-aubergine hover:bg-hoverAubergine"
             >
@@ -196,7 +198,13 @@ const AddMenu = () => {
         </div>
       ))}
 
-      <EditMenu selectedMenu={selectedMenu} />
+      {editOpen && (
+        <EditMenu
+          selectedMenu={selectedMenu}
+          editOpen={editOpen}
+          setEditOpen={setEditOpen}
+        />
+      )}
     </div>
   );
 };
