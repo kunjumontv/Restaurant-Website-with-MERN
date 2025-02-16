@@ -1,3 +1,7 @@
+import { FormEvent, useRef, useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Loader2,
   LocateIcon,
@@ -6,10 +10,6 @@ import {
   MapPinnedIcon,
   Plus,
 } from "lucide-react";
-import { Label } from "@/components/ui/label";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { FormEvent, useRef, useState } from "react";
-import { Button } from "./ui/button";
 
 type ProfileDataState = {
   fullname: string;

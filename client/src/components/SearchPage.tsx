@@ -1,14 +1,13 @@
-import FilterPage from "@/components/FilterPage";
-import { Link, useParams } from "react-router-dom";
-import { Input } from "./ui/input";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Link, useParams } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Globe, MapPin, X } from "lucide-react";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Skeleton } from "@/components/ui/skeleton"
-
-import { AspectRatio } from "./ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Globe, MapPin, X } from "lucide-react";
+import FilterPage from "@/components/FilterPage";
 import HeroImage from "@/assets/HeroPizza.png";
 
 const SearchPage = () => {

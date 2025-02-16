@@ -1,6 +1,8 @@
-import AvailableMenu from "./AvailableMenus";
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Timer } from "lucide-react";
+import AvailableMenu from "./AvailableMenus";
+
+
 const RestaurantDetail = () => {
   return (
     <div className="max-w-6xl mx-auto my-10">

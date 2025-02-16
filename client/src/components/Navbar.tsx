@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Menubar,
   MenubarContent,
@@ -14,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
+
 import {
   HandPlatter,
   Menu,
@@ -27,7 +28,8 @@ import {
   User,
   UtensilsCrossed,
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sheet,
   SheetClose,
@@ -38,7 +40,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Separator } from "./ui/separator";
 
 const setTheme = () => {};
 
@@ -172,7 +173,7 @@ const MobileNavbar = () => {
             <span>Profile</span>
           </Link>
           <Link
-            to="/order"
+            to="/order/status"
             className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
           >
             <HandPlatter />
@@ -186,7 +187,7 @@ const MobileNavbar = () => {
             <span>Cart (0)</span>
           </Link>
           <Link
-            to="/menu"
+            to="/admin/menu"
             className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
           >
             <SquareMenu />

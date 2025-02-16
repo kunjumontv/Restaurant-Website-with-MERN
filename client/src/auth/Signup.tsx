@@ -1,9 +1,9 @@
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Loader2, LockKeyhole, Mail, Phone, User } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
 
 function Signup() {

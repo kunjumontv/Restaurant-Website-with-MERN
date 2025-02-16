@@ -1,6 +1,8 @@
-import { Minus, Plus, Trash } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { useState } from "react";
+import { Minus, Plus} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import CheckoutConfirmPage from "./CheckoutConfirmPage";
 import {
   Table,
   TableBody,
@@ -9,9 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
-import { useState } from "react";
-import CheckoutConfirmPage from "./CheckoutConfirmPage";
+} from "@/components/ui/table";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);

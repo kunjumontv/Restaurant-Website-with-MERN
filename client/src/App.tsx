@@ -13,6 +13,7 @@ import Cart from "./components/Cart";
 import Restaurant from "./admin/Restaurant";
 import AddMenu from "./admin/AddMenu";
 import Orders from "./admin/Orders";
+import Success from "./components/Success";
 
 // Define the application's routes
 const appRouter = createBrowserRouter([
@@ -40,6 +41,10 @@ const appRouter = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+      {
+        path: "/order/status",
+        element: <Success />,
+      },
 
       // Admin services starts from here
       {
@@ -47,7 +52,7 @@ const appRouter = createBrowserRouter([
         element: <Restaurant />,
       },
       {
-        path: "/admin/addmenu",
+        path: "/admin/menu",
         element: <AddMenu />,
       },
       {

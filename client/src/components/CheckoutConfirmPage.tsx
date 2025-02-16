@@ -1,15 +1,14 @@
-import { Dialog, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { Dispatch, SetStateAction, useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
-  Dispatch,
-  FormEvent,
-  FormEventHandler,
-  SetStateAction,
-  useState,
-} from "react";
-import { DialogContent, DialogFooter } from "./ui/dialog";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const CheckoutConfirmPage = ({
   open,

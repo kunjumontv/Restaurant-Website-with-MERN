@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import {
   restaurantFormSchema,
   RestaurantFormSchema,
 } from "@/schema/restaurantSchema";
-import { Label } from "@radix-ui/react-menubar";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
 
 const Restaurant = () => {
   const loading = false;

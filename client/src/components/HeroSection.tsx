@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Input } from "./ui/input";
-import { Search } from "lucide-react";
-import { Button } from "./ui/button";
-import HeroImage from "@/assets/HeroPizza.png";
 import { useNavigate } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
+import HeroImage from "@/assets/HeroPizza.png";
 
 const HeroSection = () => {
   const [searchText, setSearchText] = useState<string>("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col md:flex-row max-w-7xl mx-auto md:p-10 rounded-lg items-center justify-center m-4 md:gap-20">
@@ -30,7 +30,10 @@ const HeroSection = () => {
             className="pl-10 border-2 shadow-lg"
           />
           <Search className="absolute text-gray-500 inset-y-2 left-2 pointer-events-none" />
-          <Button onClick={()=> navigate(`/search/${searchText}`)} className="bg-aubergine hover:bg-hoverAubergine">
+          <Button
+            onClick={() => navigate(`/search/${searchText}`)}
+            className="bg-aubergine hover:bg-hoverAubergine"
+          >
             Search
           </Button>
         </div>
